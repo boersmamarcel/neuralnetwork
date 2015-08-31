@@ -1,0 +1,4 @@
+function [] = feedbackPlot(X,Y, group, alpha, beta)
+
+    gscatter(X,Y,group);
+   
