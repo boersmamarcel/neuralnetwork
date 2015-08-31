@@ -1,0 +1,1 @@
+A = importdata('two_class_example_not_separable.dat')
