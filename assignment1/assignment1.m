@@ -1,4 +1,4 @@
-degree = 60; %set rotation degree
+degree = 30; %set rotation degree
 [a,b,class1]=generateData(500,2,0,0,1,0.1, degree); %generate class 1 data
 [c,d,class2]=generateData(500,2,0,0,-1,0.1, degree); %generate class 2 data
 
@@ -11,7 +11,7 @@ input=M(:,1:3); %input for the PCA
 output=M(:,4); %output for the PCA 
 
 %get weights from the PCA 
-weights=perceptronConvergenceAlgorithm(input, output, [0 0 0], 0.05, 1000);
+[weights,errors1]=perceptronConvergenceAlgorithm(input, output, [0 0 0], 0.05, 10);
 
 %calculate line coeficients from the weights
 alpha=-weights(1)/weights(3);
@@ -28,7 +28,7 @@ bias = ones(row, 1); %generate bias term
 input = [bias, data(:,1:2)];
 output = data(:,3);
 
-weights=perceptronConvergenceAlgorithm(input, output, [0 0 0], 0.05, 1000);
+[weights,errors2]=perceptronConvergenceAlgorithm(input, output, [0 0 0], 0.05, 10);
 
 %calculate line coeficients from the weights
 alpha=-weights(1)/weights(3);
