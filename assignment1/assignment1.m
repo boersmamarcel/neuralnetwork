@@ -20,6 +20,7 @@ beta=-weights(2)/weights(3);
 %plot the results
 feedbackPlot(M(:,2),M(:,3),M(:,4),alpha,beta);
 
+figure;
 %plot errors
 plot(errors1);
 
@@ -40,6 +41,7 @@ beta=-weights(2)/weights(3);
 %plot the results
 feedbackPlot(data(:,1),data(:,2),data(:,3),alpha,beta);
 
+figure
 %plot errors
 plot(errors2);
 
