@@ -1,6 +1,6 @@
-degree = 60; %set rotation degree
-[a,b,class1]=generateData(500,2,0,0,1,0.1, degree); %generate class 1 data
-[c,d,class2]=generateData(500,2,0,0,-1,0.1, degree); %generate class 2 data
+degree = 15; %set rotation degree
+[a,b,class1]=generateData(500,1,0.0,0.5,1,0.1, degree); %generate class 1 data
+[c,d,class2]=generateData(500,1,0.0,-0.5,-1,0.1, degree); %generate class 2 data
 
 w0=ones(1,500); %generate bias term
 A=[w0;a;b;class1]; %add bias term to class 1

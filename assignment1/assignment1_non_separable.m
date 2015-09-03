@@ -4,9 +4,9 @@ data = importdata('two_class_example_not_separable.dat');
 
 bias = ones(row, 1); %generate bias term
 input = [bias, data(:,1:2)];
-output = data(:,3);
+output = data(:,3)*2 - 1;
 
-epochs = 10;
+epochs = 6;
 rate = 0.1;
 
 fprintf('Learning rate: %f and epoch: %d \n', rate, epochs);
