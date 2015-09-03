@@ -21,7 +21,7 @@ beta=-weights(2)/weights(3);
 feedbackPlot(M(:,2),M(:,3),M(:,4),alpha,beta);
 
 %plot errors
-plot(erros1);
+plot(errors1);
 
 data = importdata('two_class_example_not_separable.dat');
 
