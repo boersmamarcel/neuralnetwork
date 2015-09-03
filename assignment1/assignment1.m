@@ -1,4 +1,4 @@
-degree = 15; %set rotation degree
+degree = 30; %set rotation degree
 [a,b,class1]=generateData(500,1,0.0,0.5,1,0.1, degree); %generate class 1 data
 [c,d,class2]=generateData(500,1,0.0,-0.5,-1,0.1, degree); %generate class 2 data
 
@@ -11,7 +11,7 @@ input=M(:,1:3); %input for the PCA
 output=M(:,4); %output for the PCA 
 
 epochs = 10;
-rate = 0.01;
+rate = 0.1;
 
 fprintf('Learning rate: %f and epoch: %d \n', rate, epochs);
 
@@ -24,7 +24,7 @@ beta1=-weights1(2)/weights1(3);
 
 
 epochs = 10;
-rate = 0.05;
+rate = 0.5;
 
 fprintf('Learning rate: %f and epoch: %d \n', rate, epochs);
 
@@ -37,7 +37,7 @@ beta2=-weights2(2)/weights2(3);
 
 
 epochs = 10;
-rate = 0.1;
+rate = 1;
 
 fprintf('Learning rate: %f and epoch: %d \n', rate, epochs);
 
