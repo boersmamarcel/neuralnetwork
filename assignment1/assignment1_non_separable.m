@@ -15,8 +15,8 @@ fprintf('Learning rate: %f and epoch: %d \n', rate, epochs);
 [weights1,errors1]=perceptronConvergenceAlgorithm(input, output, [0 0 0], rate, epochs);
 
 %calculate line coeficients from the weights
-alpha1=-weights(1)/weights(3);
-beta1=-weights(2)/weights(3);
+alpha1=-weights1(1)/weights1(3);
+beta1=-weights1(2)/weights1(3);
 
 
 epochs = 10;
@@ -28,8 +28,8 @@ fprintf('Learning rate: %f and epoch: %d \n', rate, epochs);
 [weights2,errors2]=perceptronConvergenceAlgorithm(input, output, [0 0 0], rate, epochs);
 
 %calculate line coeficients from the weights
-alpha2=-weights(1)/weights(3);
-beta2=-weights(2)/weights(3);
+alpha2=-weights2(1)/weights2(3);
+beta2=-weights2(2)/weights2(3);
 
 
 epochs = 10;
@@ -41,8 +41,8 @@ fprintf('Learning rate: %f and epoch: %d \n', rate, epochs);
 [weights3,errors3]=perceptronConvergenceAlgorithm(input, output, [0 0 0], rate, epochs);
 
 %calculate line coeficients from the weights
-alpha3=-weights(1)/weights(3);
-beta3=-weights(2)/weights(3);
+alpha3=-weights3(1)/weights3(3);
+beta3=-weights3(2)/weights3(3);
 
 
 %plotting data with separator line
@@ -62,5 +62,6 @@ plot(errors1); hold on;
 plot(errors2); hold on;
 plot(errors3); hold on;
 xlim([0 epochs]);
+legend('0.1', '0.5', '1');
 
 

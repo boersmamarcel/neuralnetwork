@@ -11,12 +11,12 @@ input=M(:,1:3); %input for the PCA
 output=M(:,4); %output for the PCA 
 
 epochs = 10;
-rate = 0.01;
+rate = 0.1;
 
 fprintf('Learning rate: %f and epoch: %d \n', rate, epochs);
 
 %get weights from the PCA 
-[weights1,errors1]=perceptronConvergenceAlgorithm(input, output, [0 0 0], rate, epochs);
+[weights1,errors1]=perceptronConvergenceAlgorithmSteps(input, output, [0 0 0], rate, epochs);
 
 %calculate line coeficients from the weights
 alpha1=-weights1(1)/weights1(3);
@@ -24,12 +24,12 @@ beta1=-weights1(2)/weights1(3);
 
 
 epochs = 10;
-rate = 0.05;
+rate = 0.5;
 
 fprintf('Learning rate: %f and epoch: %d \n', rate, epochs);
 
 %get weights from the PCA 
-[weights2,errors2]=perceptronConvergenceAlgorithm(input, output, [0 0 0], rate, epochs);
+[weights2,errors2]=perceptronConvergenceAlgorithmSteps(input, output, [0 0 0], rate, epochs);
 
 %calculate line coeficients from the weights
 alpha2=-weights2(1)/weights2(3);
@@ -37,12 +37,12 @@ beta2=-weights2(2)/weights2(3);
 
 
 epochs = 10;
-rate = 0.1;
+rate = 1;
 
 fprintf('Learning rate: %f and epoch: %d \n', rate, epochs);
 
 %get weights from the PCA 
-[weights3,errors3]=perceptronConvergenceAlgorithm(input, output, [0 0 0], rate, epochs);
+[weights3,errors3]=perceptronConvergenceAlgorithmSteps(input, output, [0 0 0], rate, epochs);
 
 %calculate line coeficients from the weights
 alpha3=-weights3(1)/weights3(3);
@@ -59,15 +59,16 @@ gscatter(M(:,2),M(:,3),M(:,4)); hold on;
 plot(M(:,2),yline1); hold on;
 plot(M(:,2),yline2); hold on;
 plot(M(:,2),yline3); hold on;
+legend('0.1', '0.5', '1');
    
 figure;
 %plot errors
 plot(errors1); hold on;
 plot(errors2); hold on;
 plot(errors3); hold on;
-xlim([0 epochs]);
+xlim([0 10000]);
+ylim([0 1]);
 legend('0.1', '0.5', '1');
-
 
 
 
