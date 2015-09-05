@@ -38,3 +38,17 @@ posterior_c2 = px_c2*prior_c2./px;
 figure;
 stairs(posterior_c1); hold on;
 stairs(posterior_c2);
+
+
+%plot errors for different decision boundaries
+errors = []
+for i = 1:12 
+    t1 = px_c1*prior_c1;
+    t2 = px_c2*prior_c2;
+    
+    p_error = sum(t1(i:12)) + sum(t2(1:i));
+    
+    errors = [errors p_error];
+end
+
+
