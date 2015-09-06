@@ -52,3 +52,14 @@ for i = 1:12
 end
 
 
+%weighted costs, optimal decision boundary shifts to the right
+errorsWeighted = []
+for i = 1:12 
+    t1 = px_c1*prior_c1;
+    t2 = px_c2*prior_c2;
+    
+    p_error = sum(t1(i:12)) + sum(t2(1:i))*2;
+    
+    errorsWeighted = [errorsWeighted p_error];
+end
+
