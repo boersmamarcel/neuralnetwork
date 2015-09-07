@@ -1,12 +1,31 @@
-%initialize the model
-ncentres = 2;
-input_dim = 1;
-mix = gmm(input_dim, ncentres, 'spherical'); mix.centres=[50; 60]; %manual initialization
-% Print out the initial model
-disp(' Priors Centres Variances') 
-disp([mix.priors' mix.centres mix.covars'])
-% Set up vector of options for EM trainer options = zeros(1, 18);
-options(1) = 1; options(14) = 10;
-% Prints out error values. % Max. Number of iterations.
+%use GLM for the non separable dataset
+data = importdata('two_class_example_not_separable.dat');
+
+[row,col] = size(data);
+
+input = data(:,1:2);
+output = data(:,3)*2 - 1;
 
 
+net = glm(2, 1, 'linear');
+options = zeros(15,1);
+train = glmtrain(net, options, input, output);
+
+
+error = glmerr(net, input, output);
+
+%use GLM for the separable dataset
+degree = 30; %set rotation degree
+[a,b,class1]=generateData(500,1,0.0,0.5,1,0.1, degree); %generate class 1 data
+[c,d,class2]=generateData(500,1,0.0,-0.5,-1,0.1, degree); %generate class 2 data
+
+A=[a;b;class1]; %add bias term to class 1
+B=[c;d;class2]; %add bias term to class 2
+M=[A B]; %merge data to one frame
+M=M.'; %transpose the frame
+input=M(:,1:2); %input for the PCA 
+output=M(:,3); %output for the PCA
+
+net = glm(2, 1, 'linear');
+options = zeros(15,1);
+train = glmtrain(net, options, input, output);
