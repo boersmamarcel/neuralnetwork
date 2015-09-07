@@ -6,7 +6,7 @@ M=[x.' C1 C2];
 
 %Making the barplot with frequencies
 figure 
-bar(x,M(:,2:3))
+stairs(x,M(:,2:3))
 legend({'C1','C2'})
 xlabel('X')
 ylabel('frequencies')
@@ -20,7 +20,7 @@ end
 M=[M total_inst_X.'];
 
 figure
-bar(x,[M(:,2)./total_inst_X.' M(:,3)./total_inst_X.'])
+stairs(x,[M(:,2)./total_inst_X.' M(:,3)./total_inst_X.'])
 legend({'C1','C2'})
 xlabel('X')
 ylabel('conditional probabilities')
@@ -41,8 +41,8 @@ L_ab=1;
 cost_C1=1;
 cost_C2=2;
 while cost_C1<cost_C2
-    cost_C1=L_ab*(C2(split)/(C1(split)+C2(split)));
-    cost_C2=L_ba*(C1(split)/(C1(split)+C2(split)));
+    cost_C1=L_ba*C2(split);
+    cost_C2=L_ab*C1(split);
     if cost_C1<cost_C2
         split = split+1;
     else
@@ -50,7 +50,7 @@ while cost_C1<cost_C2
     end
 end
 
-best_split2=split
+best_split2=split-1
 
    
    
