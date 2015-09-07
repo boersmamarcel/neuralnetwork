@@ -58,7 +58,7 @@ for i = 1:12
     t1 = px_c1*prior_c1;
     t2 = px_c2*prior_c2;
     
-    p_error = sum(t1((i+1):12))*2 + sum(t2(1:i));
+    p_error = sum(t1((i+1):12)) + sum(t2(1:i))*2;
     
     errorsWeighted = [errorsWeighted p_error];
 end
