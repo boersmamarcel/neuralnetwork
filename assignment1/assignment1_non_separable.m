@@ -22,11 +22,11 @@ beta1=-weights1(2)/weights1(3);
 
 
 %plotting data with separator line
-yline1=alpha1+beta1*M(:,2);
+yline1=alpha1+beta1*data(:,1);
 
 figure
 gscatter(data(:,1),data(:,2),data(:,3)); hold on;
-plot(M(:,2),yline1); hold on;
+plot(data(:,1),yline1); hold on;
    
 figure;
 %plot errors

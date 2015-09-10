@@ -29,3 +29,30 @@ fprintf('Learning rate: %f and epoch: %d \n', rate, epochs);
 
 %get weights from the PCA 
 [weights1,errors1]=perceptronConvergenceAlgorithm(input, output, [0 0 0], rate, epochs);
+
+%% Compare errors PCA and GLM
+figure
+bar([error, errors1(length(errors1))])
+set(gca,'XTickLabel',{'Error GLM', 'Error PCA'})
+legend('RMSE score');
+ylim([0,1]);
+
+%% Show the decision boundary that has been found, and make a comparison between the results you have obtained using the LMS approach and the perceptron.
+
+%PCA line
+alpha1=-weights1(1)/weights1(3);
+beta1=-weights1(2)/weights1(3);
+
+%GLM line
+alpha=-weights(1)/weights(3);
+beta=-weights(2)/weights(3);
+
+%plotting data with separator line
+yline1=alpha1+beta1*M(:,2);
+yline2=alpha+beta*M(:,2);
+
+figure
+plot(M(:,2),yline1); hold on;
+plot(M(:,2),yline2); hold on;
+gscatter(M(:,1),M(:,2),M(:,3)); 
+legend('PCA boundary', 'GLM boundary');
