@@ -15,12 +15,6 @@ for i=1:(epoch*row)
        %add error per epoch point
        newError = errorPCA(weights, input, output);
        epochErrors = [epochErrors, errorPCA(weights, input, output)];
-
-       if lastError == newError
-           %last error is equal to the new error for this epoch, then the
-           %algorithm has converged. Thus, break the loop
-          break; 
-       end
        
        %update last known error
        lastError = newError;
