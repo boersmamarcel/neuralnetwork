@@ -1,7 +1,7 @@
 %use GLM for the separable dataset
-degree = 30; %set rotation degree
-[a,b,class1]=generateData(500,1,0.0,0.5,1,0.1, degree); %generate class 1 data
-[c,d,class2]=generateData(500,1,0.0,-0.5,-1,0.1, degree); %generate class 2 data
+degree = 0; %set rotation degree
+[a,b,class1]=generateData(1500,1,-0.5,0.05,1,0.1, degree); %generate class 1 data
+[c,d,class2]=generateData(1500,1,0.5,-0.05,-1,0.1, degree); %generate class 2 data
 
 A=[a;b;class1]; %add bias term to class 1
 B=[c;d;class2]; %add bias term to class 2
@@ -22,7 +22,7 @@ error = errorPCA(weights, input, output);
 
 %% USE Perceptron convergence algorithm
 
-epochs = 10;
+epochs = 1000;
 rate = 1;
 
 fprintf('Learning rate: %f and epoch: %d \n', rate, epochs);
