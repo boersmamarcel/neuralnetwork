@@ -1,0 +1,1 @@
+data = importdata('pics.mat', '-mat');
