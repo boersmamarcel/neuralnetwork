@@ -24,6 +24,7 @@ for k = 1:length(files)
             [train, error, net] = NeuralNetworkLine(data.('x')(trainIdx), data.('t')(trainIdx), i, 100);
 
             y = mlpfwd(train, data.('x')(testIdx));
+            disp(rms(data.('t')(testIdx) - y));
 
         end
 
