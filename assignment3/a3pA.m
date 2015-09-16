@@ -40,6 +40,19 @@ for k = 1:length(files)
         scatter(data.('x'), data.('t')); hold on;
         scatter(data.('x')(testIdx), y, 'x');
     end
+    
+    mean_errors=[];
+    for i = 1:length(hidden_layers);
+        mean_error=mean(errors((i-1)*5+1:i*5));
+        mean_errors=[mean_errors mean_error];
+    end
+    
+    figure;
+    plot(hidden_layers,mean_errors);
+    xlabel('number of hidden layers')
+    ylabel('average error')
+        
+    
 end
 
 
