@@ -1,4 +1,4 @@
-data = importdata('pics_gabor.mat', '-mat');
+data = importdata('pics.mat', '-mat');
 
 glassIdx = data.classGlass == 1;
 noGlassIdx = data.classGlass == 0;
@@ -16,7 +16,7 @@ hidden_nodes = [100, 500, 1000, 1500];
 errors = [];
 
 for i = 1:length(hidden_nodes)
-    
+    fprintf('Neural network with hidden nodes:%d\n', hidden_nodes(i));
     fold = 10;
     indicesGlass = crossvalind('Kfold', sum(glassIdx), fold);
     indicesNoGlass = crossvalind('Kfold', length(data.class) - sum(glassIdx), fold);
