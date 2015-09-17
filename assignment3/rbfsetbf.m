@@ -31,7 +31,7 @@ clusters = net.nhidden;
 centres = kmeans(rand(clusters,size(x,2)), x, kmoptions);
 
 % Now set the centres of the RBF from the centres of the mixture model
-net.c = centres
+net.c = centres;
 
 % options(7) gives scale of function widths
 net = rbfsetfw(net, options(7));
