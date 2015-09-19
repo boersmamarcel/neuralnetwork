@@ -18,7 +18,7 @@ for i = 1:length(kernels)
         % for gam low minimizing of the
         % complexity of the model is emphasized, for gam high, good fitting
         % of the training data points is stressed.
-        gam = 1;
+        gam = 0.8;
 
         if strcmp(kernel, 'poly_kernel')
             degree = 10;
