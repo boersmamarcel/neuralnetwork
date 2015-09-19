@@ -11,7 +11,7 @@ dataNoGlass = data.pics(noGlassIdx,:); % no glass data
 %construct rbf network
 input_nodes = 56*46;
 output_nodes = 1;
-hidden_nodes = [100, 500, 1000, 1500];
+hidden_nodes = [10, 50, 100, 200, 500, 1000];
 
 errors = [];
 
@@ -59,4 +59,5 @@ figure;
 plot(hidden_nodes,mean_errors);
 xlabel('number of hidden layers')
 ylabel('average error')
+ylim([0,1])
 

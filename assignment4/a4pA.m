@@ -47,7 +47,7 @@ for i = 1:length(hidden_nodes)
             y = rbffwd(net3, testData);
             classEst = y>0;
 
-            error=(rms(classEst-y));
+            error=(rms(classEst-testClass));
 
             errors = [errors error];
             
@@ -65,4 +65,5 @@ figure;
 plot(hidden_nodes,mean_errors);
 xlabel('number of hidden layers')
 ylabel('average error')
+ylim([0,1])
 
