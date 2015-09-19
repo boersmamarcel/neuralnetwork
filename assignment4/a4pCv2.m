@@ -32,13 +32,13 @@ for j = 1:fold
 
 
         type='c'; %classification
-        kernel = 'RBF_kernel'; %RBF_kernel/lin_kernel/poly_kernel
-        dataprocessing = 'preprocess'; % preprocess/original
+        kernel = 'lin_kernel'; %RBF_kernel/lin_kernel/poly_kernel
+        dataprocessing = 'preprocessing'; % preprocess/original
         %GAM: regularization parameter
         % for gam low minimizing of the
         % complexity of the model is emphasized, for gam high, good fitting
         % of the training data points is stressed.
-        gam = 1;
+        gam = 0.01;
 
         if strcmp(kernel, 'poly_kernel')
             degree = 10;
@@ -46,7 +46,7 @@ for j = 1:fold
             model = {trainData,trainClass,type,gam,[highlowbalance degree],kernel};
 
         elseif strcmp(kernel, 'RBF_kernel')
-            sig2 = 0.2;
+            sig2 = 2;
             model = {trainData,trainClass,type,gam,sig2,kernel,dataprocessing};
 
         else
@@ -70,4 +70,7 @@ plot(errors);
 xlabel('number of hidden layers')
 ylabel('average error')
 ylim([0,1])
+
+%give confusion matrix
+confusionmat(simlssvm(model, {alpha, b}, data.pics), data.classGlass.')
 
