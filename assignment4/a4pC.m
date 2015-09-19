@@ -15,7 +15,7 @@ gam = 1;
 
 if strcmp(kernel, 'poly_kernel')
     degree = 10;
-    highlowbalance = 0.5;
+    highlowbalance = 0.2;
     model = {X,Y,type,gam,[highlowbalance degree],kernel};
    
 elseif strcmp(kernel, 'RBF_kernel')

@@ -18,11 +18,11 @@ for i = 1:length(kernels)
         % for gam low minimizing of the
         % complexity of the model is emphasized, for gam high, good fitting
         % of the training data points is stressed.
-        gam = 10;
+        gam = 1;
 
         if strcmp(kernel, 'poly_kernel')
             degree = 10;
-            highlowbalance = 0.5;
+            highlowbalance = 0.2;
             model = {X,Y,type,gam,[highlowbalance degree],kernel};
 
         elseif strcmp(kernel, 'RBF_kernel')
