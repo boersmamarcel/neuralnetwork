@@ -36,7 +36,7 @@ for i = 1:length(hidden_nodes)
             
             
             net = mlp(input_nodes, hidden_nodes(i), output_nodes, 'linear');
-            [trainNet, errorMLP] = mlptrain(net, trainData, trainClass, 100);
+            [trainNet, errorMLP] = mlptrain(net, trainData, trainClass, 40);
 
              y = mlpfwd(trainNet, testData);
              y = y>0;

@@ -6,11 +6,12 @@ for k = 1:length(files)
     input=data.('x');
     output=data.('t');
     
-    degrees=[2,4,6]
-    errors=[]
+    degrees=[3,4,5,6,7,8,9,10,11];
+    errors_test=[];
+    errors_train=[];
     
-    for i = 1:length(degrees)
-        degree=degrees(i)
+    for i = 1:length(degrees);
+        degree=degrees(i);
         
                 %5-fold cross validation
         fold = 5;
@@ -19,31 +20,39 @@ for k = 1:length(files)
             testIdx = (indices == j); 
             trainIdx = ~testIdx;
     
-            p=polyfit(data.('x')(trainIdx),data.('t')(trainIdx),degree);
-            x1=linspace(0,max(data.('x')));  
+            [p,S,mu]=polyfit(data.('x')(trainIdx),data.('t')(trainIdx),degree);
+            x1=linspace(min(data.('x')),max(data.('x')));  
             y=polyval(p,x1);
         
-            error=(rms(data.('t')(testIdx)-y(testIdx).')); 
-            errors=[errors error];
+            error_test=(rms(data.('t')(testIdx)-y(testIdx).')); 
+            errors_test=[errors_test error_test];
+            
+            error_train=(rms(data.('t')(trainIdx)-y(trainIdx).')); 
+            errors_train=[errors_train error_train];
 
         end
         
     figure;    
     plot(x1,y); hold on;
-    scatter(data.('x'), data.('t'));
+    scatter(data.('x'), (data.('t')-mean(data.('t')))/std(data.('t')));
 
     end
     
-    mean_errors=[];
+    mean_errors_test=[];
+    mean_errors_train=[];
     for i = 1:length(degrees);
-        mean_error=mean(errors((i-1)*fold+1:i*fold));
-        mean_errors=[mean_errors mean_error];
+        mean_error_test=mean(errors_test((i-1)*fold+1:i*fold));
+        mean_errors_test=[mean_errors_test mean_error_test];
+        mean_error_train=mean(errors_train((i-1)*fold+1:i*fold));
+        mean_errors_train=[mean_errors_train mean_error_train];
     end
     
     figure;
-    plot(degrees,mean_errors);
+    plot(degrees,mean_errors_test); hold on;
+    plot(degrees,mean_errors_train);
     xlabel('degrees of the polynomial')
     ylabel('average error')
+    legend('error test set','error training set')
     
     
 end
