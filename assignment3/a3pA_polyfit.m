@@ -6,7 +6,7 @@ for k = 1:length(files)
     input=data.('x');
     output=data.('t');
     
-    degrees=[1,2, 3,4,5,6,7,8,9,10,11];
+    degrees=[1,2,3,4,5,6,7];
     errors_test=[];
     errors_train=[];
     
@@ -19,9 +19,10 @@ for k = 1:length(files)
         for j=1:fold
             testIdx = (indices == j); 
             trainIdx = ~testIdx;
+            newdata = (data.('x')-mean(data.('x')))/std(data.('x'));
     
-            [p,S,mu]=polyfit(data.('x')(trainIdx),data.('t')(trainIdx),degree);
-            x1=linspace(-2,2);  
+            [p,S,mu]=polyfit(newdata(trainIdx),data.('t')(trainIdx),degree);
+            x1=linspace(min(newdata),max(newdata));  
             y=polyval(p,x1);
         
             error_test=(rms(data.('t')(testIdx)-y(testIdx).')); 
@@ -34,7 +35,7 @@ for k = 1:length(files)
         
     figure;    
     plot(x1,y); hold on;
-    newdata = (data.('x')-mean(data.('x')))/std(data.('x'));
+    
     scatter(newdata, data.t, '*');
     
 
