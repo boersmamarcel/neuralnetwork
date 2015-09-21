@@ -11,7 +11,7 @@ dataNoGlass = data.pics(noGlassIdx,:); % no glass data
 %construct rbf network
 input_nodes = 56*46;
 output_nodes = 1;
-hidden_nodes = [10, 20];
+hidden_nodes = [10, 50, 100, 200];
 
 RMStest=[];
 RMStrain=[];
@@ -22,7 +22,7 @@ for i = 1:length(hidden_nodes)
     mean_errors_test=[];
     mean_errors_train=[];
     
-    for l = 1:5
+    for l = 1:10
         
         errors_test = [];
         errors_train = [];
