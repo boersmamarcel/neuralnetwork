@@ -1,4 +1,4 @@
-data = importdata('pics.mat', '-mat');
+data = importdata('pics_gabor.mat', '-mat');
 
 glassIdx = data.classGlass == 1;
 noGlassIdx = data.classGlass == 0;
@@ -76,4 +76,16 @@ figure;
     xlabel('number of hidden layers')
     ylabel('RMS')
     legend('error test set','error training set')
+    ylim([0 1])
 
+    
+%pick 500 hidden nodes
+net = mlp(2576, 3500, 1, 'logistic');
+[trainNet, errorMLP] = mlptrain(net, data.pics, data.classGlass.', 40);
+
+y = mlpfwd(trainNet, data.pics);
+y = y > 0.5;
+
+M = [y data.classGlass.'];
+confusionmat(M(:,1), M(:,2))
+    

@@ -22,6 +22,7 @@ for i = 1:length(hidden_nodes)
     mean_errors_test=[];
     mean_errors_train=[];
     
+<<<<<<< HEAD
     for l = 1:5
         
         errors_test = [];
@@ -29,6 +30,38 @@ for i = 1:length(hidden_nodes)
         fold = 10;
         indicesGlass = crossvalind('Kfold', sum(glassIdx), fold);
         indicesNoGlass = crossvalind('Kfold', length(data.class) - sum(glassIdx), fold);
+=======
+    for j = 1:fold
+
+            testIdxGlass = (indicesGlass == j); 
+            testIdxNoGlass = (indicesNoGlass == j);
+            trainIdxGlass = ~testIdxGlass;
+            trainIdxNoGlass = ~testIdxNoGlass;
+            
+            testData = [dataGlass(testIdxGlass,:); dataNoGlass(testIdxNoGlass,:)];
+            trainData = [dataGlass(trainIdxGlass,:); dataNoGlass(trainIdxNoGlass,:)];
+            
+            testClass = [ones(length(dataGlass(testIdxGlass)),1); zeros(length(dataNoGlass(testIdxNoGlass)),1)];
+            trainClass = [ones(length(dataGlass(trainIdxGlass)),1); zeros(length(dataNoGlass(trainIdxNoGlass)),1)];
+            
+            
+            net = rbf(input_nodes, hidden_nodes(i), output_nodes, 'gaussian');
+            
+            options = zeros(1,14);
+            options(1) = -1;
+            net2 = rbfsetbf(net, options, trainData);
+
+            net3 = rbftrain(net2, options, trainData, trainClass);
+
+            y = rbffwd(net3, testData);
+            classEst = y>0.5;
+
+            error=(rms(classEst-testClass));
+
+            errors = [errors error];
+            
+    end
+>>>>>>> origin/master
     
         for j = 1:fold
 
@@ -77,6 +110,30 @@ figure;
 plot(hidden_nodes,RMStest); hold on;
 plot(hidden_nodes,RMStrain);
 xlabel('number of hidden nodes')
+<<<<<<< HEAD
 ylabel('RMS')
 ylim([0.8,0.9])
+=======
+ylabel('average error')
+
+
+
+
+%choose 100 k-means
+net = rbf(input_nodes, 100, output_nodes, 'gaussian');
+
+options = zeros(1,14);
+options(1) = -1;
+net2 = rbfsetbf(net, options, data.pics);
+
+net3 = rbftrain(net2, options, data.pics, data.classGlass.');
+
+y = rbffwd(net3, data.pics);
+
+y = y > 0.5;
+
+M = [y data.classGlass.'];
+confusionmat(M(:,1), M(:,2))
+    
+>>>>>>> origin/master
 

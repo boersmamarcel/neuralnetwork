@@ -1,11 +1,12 @@
-%%code based on http://www.mathworks.com/matlabcentral/fileexchange/23253-gabor-filter/content/Gabor%20Filter/gabor_fn.m
+%% code based on http://www.mathworks.com/matlabcentral/fileexchange/23253-gabor-filter/content/Gabor%20Filter/gabor_fn.m
+%% and on http://www.mathworks.com/matlabcentral/fileexchange/23253-gabor-filter/content/Gabor%20Filter/gabor_example.m
 data = importdata('pics.mat', '-mat');
 data_gabor = zeros(size(data.pics, 1), size(data.pics, 2));
 
 for i = 1:size(data.pics,1)
-    lambda  = 8;
+    lambda  = 1.8;
     theta   = 0;
-    psi     = [0 pi/2];
+    psi     = [0 pi/8];
     gamma   = 0.5;
     bw      = 1;
     N       = 8;
@@ -26,7 +27,6 @@ for i = 1:size(data.pics,1)
     % normalize
     data_gabor(i,:) = reshape(img_out_disp, 2576, 1);
 end
-
 
 save 'pics_gabor.mat' data;
 
