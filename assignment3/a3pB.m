@@ -80,7 +80,7 @@ figure;
 
     
 %pick 500 hidden nodes
-net = mlp(2576, 3500, 1, 'logistic');
+net = mlp(2576, 3000, 1, 'logistic');
 [trainNet, errorMLP] = mlptrain(net, data.pics, data.classGlass.', 40);
 
 y = mlpfwd(trainNet, data.pics);
