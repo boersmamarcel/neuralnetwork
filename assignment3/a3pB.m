@@ -47,9 +47,9 @@ for i = 1:length(hidden_nodes)
             [trainNet, errorMLP] = mlptrain(net, trainData, trainClass, 40);
 
              y = mlpfwd(trainNet, testData);
-             y = y>0;
+             y = y>0.5;
              ytrain=mlpfwd(trainNet,trainData);
-             ytrain=ytrain>0;
+             ytrain=ytrain>0.5;
 
              error_test=(rms(testClass-y));
              error_train=rms(trainClass-ytrain);
@@ -76,4 +76,16 @@ figure;
     xlabel('number of hidden layers')
     ylabel('RMS')
     legend('error test set','error training set')
+    ylim([0 1])
 
+    
+%pick 500 hidden nodes
+net = mlp(2576, 3500, 1, 'logistic');
+[trainNet, errorMLP] = mlptrain(net, data.pics, data.classGlass.', 40);
+
+y = mlpfwd(trainNet, data.pics);
+y = y > 0.5;
+
+M = [y data.classGlass.'];
+confusionmat(M(:,1), M(:,2))
+    

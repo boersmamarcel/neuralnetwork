@@ -45,7 +45,7 @@ for i = 1:length(hidden_nodes)
             net3 = rbftrain(net2, options, trainData, trainClass);
 
             y = rbffwd(net3, testData);
-            classEst = y>0;
+            classEst = y>0.5;
 
             error=(rms(classEst-testClass));
 
@@ -65,5 +65,24 @@ figure;
 plot(hidden_nodes,mean_errors);
 xlabel('number of hidden nodes')
 ylabel('average error')
-ylim([0.8,0.9])
+
+
+
+
+%choose 100 k-means
+net = rbf(input_nodes, 100, output_nodes, 'gaussian');
+
+options = zeros(1,14);
+options(1) = -1;
+net2 = rbfsetbf(net, options, data.pics);
+
+net3 = rbftrain(net2, options, data.pics, data.classGlass.');
+
+y = rbffwd(net3, data.pics);
+
+y = y > 0.5;
+
+M = [y data.classGlass.'];
+confusionmat(M(:,1), M(:,2))
+    
 
