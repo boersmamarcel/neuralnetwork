@@ -110,10 +110,6 @@ figure;
 plot(hidden_nodes,RMStest); hold on;
 plot(hidden_nodes,RMStrain);
 xlabel('number of hidden nodes')
-<<<<<<< HEAD
-ylabel('RMS')
-ylim([0.8,0.9])
-=======
 ylabel('average error')
 
 
@@ -135,5 +131,5 @@ y = y > 0.5;
 M = [y data.classGlass.'];
 confusionmat(M(:,1), M(:,2))
     
->>>>>>> origin/master
+
 
