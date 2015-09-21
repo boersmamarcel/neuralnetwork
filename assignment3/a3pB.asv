@@ -11,16 +11,23 @@ dataNoGlass = data.pics(noGlassIdx,:); % no glass data
 %construct rbf network
 input_nodes = 56*46;
 output_nodes = 1;
-hidden_nodes = [10, 50, 100, 200];
+hidden_nodes = [10, 50, 100, 200, 500, 1000];
 
-errors = [];
+RMStest=[];
+RMStrain=[];
 
 for i = 1:length(hidden_nodes)
+    final_errors_test=[];
+    final_errors_train=[];
     fprintf('Neural network with hidden nodes:%d\n', hidden_nodes(i));
     
+    for l=1:100
     fold = 10;
     indicesGlass = crossvalind('Kfold', sum(glassIdx), fold);
     indicesNoGlass = crossvalind('Kfold', length(data.class) - sum(glassIdx), fold);
+    
+    errors_test=[];
+    errors
     
     for j = 1:fold
 
@@ -36,34 +43,31 @@ for i = 1:length(hidden_nodes)
             trainClass = [ones(length(dataGlass(trainIdxGlass)),1); zeros(length(dataNoGlass(trainIdxNoGlass)),1)];
             
             
-            net = rbf(input_nodes, hidden_nodes(i), output_nodes, 'gaussian');
-            
-            options = zeros(1,14);
-            options(1) = -1;
-            net2 = rbfsetbf(net, options, trainData);
+            net = mlp(input_nodes, hidden_nodes(i), output_nodes, 'logistic');
+            [trainNet, errorMLP] = mlptrain(net, trainData, trainClass, 40);
 
-            net3 = rbftrain(net2, options, trainData, trainClass);
+             y = mlpfwd(trainNet, testData);
+             y = y>0;
 
-            y = rbffwd(net3, testData);
-            classEst = y>0;
+             error=(rms(testClass-y));
 
-            error=(rms(classEst-testClass));
-
-            errors = [errors error];
+             errors = [errors error];
             
     end
+    end
+    
     
 end
 
 mean_errors=[];
 for i = 1:length(hidden_nodes);
-    mean_error=mean(errors((i-1)*5+1:i*5));
+    mean_error=mean(errors((i-1)*10+1:i*10));
     mean_errors=[mean_errors mean_error];
 end
 
 figure;
 plot(hidden_nodes,mean_errors);
-xlabel('number of hidden nodes')
+xlabel('number of hidden layers')
 ylabel('average error')
-ylim([0.8,0.9])
+ylim([0,1])
 
