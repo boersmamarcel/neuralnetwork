@@ -13,12 +13,19 @@ indicesGlass = crossvalind('Kfold', sum(glassIdx), fold);
 indicesNoGlass = crossvalind('Kfold', length(data.class) - sum(glassIdx), fold);
 kernels={'RBF_kernel','lin_kernel','poly_kernel'};
 
+
+
 mean_errors_test=[];
 mean_errors_train=[];
 
-
+RMStest=[];
+RMStrain=[];
 
 for i = 1:length(kernels);
+    mean_errors_test=[];
+    mean_errors_test=[];
+    
+    for l = 1:100;
     errors_test = [];
     errors_train=[];
 
@@ -78,9 +85,12 @@ mean_errors_train=[mean_errors_test mean(errors_train)];
 
 
 
+    end
+
+    RMStest=[RMStest mean(mean_errors_test)];
+    RMStrain=[RMStrain mean(mean_errors_train)];
+
 end
-
-
 
 %figure;
 %plot(errors);

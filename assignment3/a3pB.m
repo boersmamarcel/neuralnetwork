@@ -11,7 +11,7 @@ dataNoGlass = data.pics(noGlassIdx,:); % no glass data
 %construct rbf network
 input_nodes = 56*46;
 output_nodes = 1;
-hidden_nodes = [100,200,500,1000,1500];
+hidden_nodes = [100,500];
 
 RMStest=[];
 RMStrain=[];
@@ -44,7 +44,7 @@ for i = 1:length(hidden_nodes)
             
             
             net = mlp(input_nodes, hidden_nodes(i), output_nodes, 'logistic');
-            [trainNet, errorMLP] = mlptrain(net, trainData, trainClass, 40);
+            [trainNet, errorMLP] = mlptrain(net, trainData, trainClass, 10);
 
              y = mlpfwd(trainNet, testData);
              y = y>0.5;
