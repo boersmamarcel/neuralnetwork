@@ -22,7 +22,6 @@ for i = 1:length(hidden_nodes)
     mean_errors_test=[];
     mean_errors_train=[];
     
-<<<<<<< HEAD
     for l = 1:5
         
         errors_test = [];
@@ -30,38 +29,7 @@ for i = 1:length(hidden_nodes)
         fold = 10;
         indicesGlass = crossvalind('Kfold', sum(glassIdx), fold);
         indicesNoGlass = crossvalind('Kfold', length(data.class) - sum(glassIdx), fold);
-=======
-    for j = 1:fold
 
-            testIdxGlass = (indicesGlass == j); 
-            testIdxNoGlass = (indicesNoGlass == j);
-            trainIdxGlass = ~testIdxGlass;
-            trainIdxNoGlass = ~testIdxNoGlass;
-            
-            testData = [dataGlass(testIdxGlass,:); dataNoGlass(testIdxNoGlass,:)];
-            trainData = [dataGlass(trainIdxGlass,:); dataNoGlass(trainIdxNoGlass,:)];
-            
-            testClass = [ones(length(dataGlass(testIdxGlass)),1); zeros(length(dataNoGlass(testIdxNoGlass)),1)];
-            trainClass = [ones(length(dataGlass(trainIdxGlass)),1); zeros(length(dataNoGlass(trainIdxNoGlass)),1)];
-            
-            
-            net = rbf(input_nodes, hidden_nodes(i), output_nodes, 'gaussian');
-            
-            options = zeros(1,14);
-            options(1) = -1;
-            net2 = rbfsetbf(net, options, trainData);
-
-            net3 = rbftrain(net2, options, trainData, trainClass);
-
-            y = rbffwd(net3, testData);
-            classEst = y>0.5;
-
-            error=(rms(classEst-testClass));
-
-            errors = [errors error];
-            
-    end
->>>>>>> origin/master
     
         for j = 1:fold
 
@@ -86,9 +54,9 @@ for i = 1:length(hidden_nodes)
                 net3 = rbftrain(net2, options, trainData, trainClass);
 
                 y = rbffwd(net3, testData);
-                classEst = y>0;
+                classEst = y>0.5;
                 y2=rbffwd(net3,trainData);
-                classEstTrain = y2>0;
+                classEstTrain = y2>0.5;
 
                 error_test=(rms(classEst-testClass));
                 error_train = rms(classEstTrain-trainClass);
