@@ -35,7 +35,7 @@ for i = 1:length(hidden_nodes)
             trainClass = [ones(length(dataGlass(trainIdxGlass)),1); zeros(length(dataNoGlass(trainIdxNoGlass)),1)];
             
             
-            net = mlp(input_nodes, hidden_nodes(i), output_nodes, 'linear');
+            net = mlp(input_nodes, hidden_nodes(i), output_nodes, 'logistic');
             [trainNet, errorMLP] = mlptrain(net, trainData, trainClass, 40);
 
              y = mlpfwd(trainNet, testData);
