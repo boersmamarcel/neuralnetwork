@@ -11,7 +11,7 @@ dataNoGlass = data.pics(noGlassIdx,:); % no glass data
 %construct rbf network
 input_nodes = 56*46;
 output_nodes = 1;
-hidden_nodes = [10, 20];
+hidden_nodes = [10, 20, 80, 150];
 
 RMStest=[];
 RMStrain=[];
@@ -22,7 +22,8 @@ for i = 1:length(hidden_nodes)
     mean_errors_test=[];
     mean_errors_train=[];
     
-    for l = 1:5
+    for l = 1:8
+        disp(l)
         
         errors_test = [];
         errors_train = [];
@@ -54,12 +55,12 @@ for i = 1:length(hidden_nodes)
                 net3 = rbftrain(net2, options, trainData, trainClass);
 
                 y = rbffwd(net3, testData);
-                classEst = y>0.5;
+                %classEst = y>0.5;
                 y2=rbffwd(net3,trainData);
-                classEstTrain = y2>0.5;
+                %classEstTrain = y2>0.5;
 
-                error_test=(rms(classEst-testClass));
-                error_train = rms(classEstTrain-trainClass);
+                error_test=(rms(y-testClass));
+                error_train = (rms(y2-trainClass));
 
                 errors_test = [errors_test error_test];
                 errors_train = [errors_train error_train];
