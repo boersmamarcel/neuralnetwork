@@ -46,7 +46,7 @@ for i = 1:length(hidden_nodes)
                 trainClass = [ones(length(dataGlass(trainIdxGlass)),1); zeros(length(dataNoGlass(trainIdxNoGlass)),1)];
 
 
-                net = rbf(input_nodes, hidden_nodes(i), output_nodes, 'gaussian');
+                net = rbf(input_nodes, hidden_nodes(i), output_nodes, 'r4logr');
 
                 options = zeros(1,14);
                 options(1) = -1;
@@ -85,7 +85,7 @@ ylabel('average error')
 
 
 %choose 100 k-means
-net = rbf(input_nodes, 100, output_nodes, 'gaussian');
+net = rbf(input_nodes, 150, output_nodes, 'r4logr');
 
 options = zeros(1,14);
 options(1) = -1;
@@ -93,12 +93,17 @@ net2 = rbfsetbf(net, options, data.pics);
 
 net3 = rbftrain(net2, options, data.pics, data.classGlass.');
 
-y = rbffwd(net3, data.pics);
 
-y = y > 0.5;
+boundary=[0,0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8];
+missclassifications=[];
+for i =1:length(boundary)
+    y = rbffwd(net3, data.pics);
 
-M = [y data.classGlass.'];
-confusionmat(M(:,1), M(:,2))
+    y = y > 0;
+
+    M = [y data.classGlass.'];
+    C=confusionmat(M(:,1), M(:,2))
     
+    missclassifications=[missclassifications (C(1,2)+C(2,1))]   
 
-
+end

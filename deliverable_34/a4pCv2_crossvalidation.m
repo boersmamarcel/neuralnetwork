@@ -15,6 +15,7 @@ kernels={'RBF_kernel','lin_kernel','poly_kernel'};
 
 
 
+
 mean_errors_test=[];
 mean_errors_train=[];
 
@@ -25,7 +26,8 @@ for i = 1:length(kernels);
     mean_errors_test=[];
     mean_errors_test=[];
     
-    for l = 1:100;
+    for l = 1:10;
+        disp(l)
     errors_test = [];
     errors_train=[];
 
@@ -89,15 +91,13 @@ mean_errors_train=[mean_errors_test mean(errors_train)];
 
     RMStest=[RMStest mean(mean_errors_test)];
     RMStrain=[RMStrain mean(mean_errors_train)];
+    
+    %give confusion matrix
+    confusionmat(simlssvm(model, {alpha, b}, data.pics), data.classGlass.')
 
 end
 
-%figure;
-%plot(errors);
-%xlabel('number of hidden layers')
-%ylabel('average error')
-%ylim([0,1])
 
-%give confusion matrix
-confusionmat(simlssvm(model, {alpha, b}, data.pics), data.classGlass.')
+
+
 
