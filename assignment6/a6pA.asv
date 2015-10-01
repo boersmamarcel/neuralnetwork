@@ -2,13 +2,13 @@
 errors=[];
 %neurons=[2,5,8,11,14,17,20];
 %for k = 1:length(neurons);    
-final_learning_rate=[0.13,0.1,0.07,0.04,0.01]
-for n = 1:length(final_learning_rate);
+final_learning_rate=[0.1,0.07,0.04,0.01]
+for n = 1:length(final_learning_rate)
     disp(n)
 
-    X = exprnd(2,[1,1000]);
+    X = exprnd(2,[1,500]);
     X=1-(X/max(X));
-    Y=randn(1000,1);
+    Y=randn(500,1);
     Y=Y.';
     %X = rand(1,1000);
     %Y = rand(1,1000);
@@ -18,10 +18,8 @@ for n = 1:length(final_learning_rate);
     scatter(M(1,:),M(2,:),'bo'); hold on; 
 
 
-    %xneurons=neurons(7);
-    %yneurons=neurons(7);
-    xneurons=15;
-    yneurons=15;
+    xneurons=neurons(7);
+    yneurons=neurons(7);
     totalneurons=xneurons*yneurons;
     net=som(2,[xneurons,yneurons]);
 
@@ -29,7 +27,7 @@ for n = 1:length(final_learning_rate);
     options(14) = 1000 ; %epochs ;
     options(18) = 0.9;   %initial_learning_rate;  
     %options(16) = 0.05;  %final_learning_rate; 
-    options(16) = final_learning_rate(n);
+    options(16)=final_learning_rate(n);
     options(17) = 8;     %Initial neighbourhood size
     options(15) = 1;     %Final neighbourhood size
     
