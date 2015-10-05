@@ -10,8 +10,8 @@
 
 
 
-%load 'dataset_final_assignment.mat';
-data = importdata('enriched.mat');
+load 'dataset_final_assignment.mat';
+% data = importdata('enriched.mat');
 
 % grid size
 
