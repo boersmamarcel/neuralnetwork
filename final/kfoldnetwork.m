@@ -11,7 +11,7 @@ for g = 1:length(gradients)
     disp('Start training for gradient');
     disp(gradients{g});
     
-    input = data(:, [2 3 4 5 8 9]);
+    input = data(:, [4 5 8 9]);
     output = data(:, 6:7);
 
 %     hidden_layers = [2500, 3500, 4500];
@@ -110,5 +110,5 @@ xlabel('number of hidden layers')
 ylabel('average error')
 legend(legendText);
 
-saveas(gcf,strcat('rmse_eucl_full_correct','.png'));
+saveas(gcf,strcat('rmse_eucl_full_correct_no_xy','.png'));
     
