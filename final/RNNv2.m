@@ -1,7 +1,7 @@
 max_y = 800;
 source = [542.0, max_y-439.0];
 %[X,T] = simpleseries_dataset;
-net = layrecnet(2:2,10);
+net = layrecnet(1:2,10);
 %[Xs,Xi,Ai,Ts] = preparets(net,X,T);
 %net = train(net,Xs,Ts,Xi,Ai);
 %view(net)
@@ -9,8 +9,6 @@ net = layrecnet(2:2,10);
 %perf = perform(net,y,Ts)
 
 %calculating distances to source
-
-
 distance_to_source=[];
 for i=1:length(data(:,1));
     
@@ -33,8 +31,8 @@ end
 loc_to_source=loc_to_source(:,1:46);
 X2=con2seq(loc_to_source);
 
-input=[distance_to_source; [loc_to_source]];
-X3=con2seq(input)
+input=[distance_to_source; loc_to_source];
+X3=con2seq(input);
 
 
 %targets consist of the direction
@@ -50,12 +48,13 @@ end
 
 Y=con2seq(targets);
 
-net=train(net,X3,Y)
+net=train(net,X3,Y);
+net=train(net,input,targets)
 
 %[Xs,Xi,Ai,Ts,EWs,shift] = preparets(net,X2,Y);
 %net = train(net,Xs,Ts);
-y = net(X);
-perf = perform(net,y,Y)
+y = net(X3);
+perf = perform(net,y,Y);
 %y = net(Xs,Xi,Ai);
 
 %to plot:
