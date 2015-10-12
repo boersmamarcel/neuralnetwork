@@ -21,7 +21,7 @@ input_layers = size(input,2);
 output_layers = size(output,2);
 
 
-net = mlp(input_layers, hidden_layer, output_layers, 'linear');
+net = mlp(input_layers, 45000, output_layers, 'linear');
 
 
 options = zeros(1,20);
@@ -194,15 +194,25 @@ agent3yNN = [];
 for t = 0:(end_time-1)
     idx = t*number_of_agents; 
     
-    agent1xNN = [agent1xNN dataNN(idx+1, 2) + predictedNN(idx+1,1)];
-    agent1yNN = [agent1yNN max_y-dataNN(idx+1, 3) + predictedNN(idx+1,2)];
-    
-    agent2xNN = [agent2xNN dataNN(idx+25, 2) + predictedNN(idx+25,1)];
-    agent2yNN = [agent2yNN max_y-dataNN(idx+25, 3) + predictedNN(idx+25,2)];
-    
-    agent3xNN = [agent3xNN dataNN(idx+34, 2) + predictedNN(idx+34,1)];
-    agent3yNN = [agent3yNN max_y-dataNN(idx+34, 3) + predictedNN(idx+34,2)];
-    
+    if t == 0
+        agent1xNN = [agent1xNN dataNN(idx+1, 2) + predictedNN(idx+1,1)];
+        agent1yNN = [agent1yNN max_y-dataNN(idx+1, 3) + predictedNN(idx+1,2)];
+
+        agent2xNN = [agent2xNN dataNN(idx+25, 2) + predictedNN(idx+25,1)];
+        agent2yNN = [agent2yNN max_y-dataNN(idx+25, 3) + predictedNN(idx+25,2)];
+
+        agent3xNN = [agent3xNN dataNN(idx+34, 2) + predictedNN(idx+34,1)];
+        agent3yNN = [agent3yNN max_y-dataNN(idx+34, 3) + predictedNN(idx+34,2)];
+    else
+        agent1xNN = [agent1xNN agent1xNN(end) + predictedNN(idx+1,1)];
+        agent1yNN = [agent1yNN agent1yNN(end) - predictedNN(idx+1,2)];
+
+        agent2xNN = [agent2xNN agent2xNN(end) + predictedNN(idx+25,1)];
+        agent2yNN = [agent2yNN agent2yNN(end) - predictedNN(idx+25,2)];
+
+        agent3xNN = [agent3xNN agent3xNN(end) + predictedNN(idx+34,1)];
+        agent3yNN = [agent3yNN agent3yNN(end) - predictedNN(idx+34,2)];
+    end
 end
 
 

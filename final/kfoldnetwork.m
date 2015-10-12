@@ -14,7 +14,7 @@ for g = 1:length(gradients)
     input = data(:, [2 3 4 5 8 9]);
     output = data(:, 6:7);
 
-%     hidden_layers = [2500, 3500, 4500];
+%         hidden_layers = [2500, 3500, 4500];
    % hidden_layers = [50, 100, 200];
     hidden_layers = [100, 200, 500, 1000, 1500, 2500, 4500, 8500, 12000, 14000, 18000, 22000];
 
