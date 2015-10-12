@@ -1,7 +1,7 @@
 data = importdata('dataset_final_assignment.mat');
 dataEnriched = data;
 %% enrich data
-additional = 1;
+additional = 0;
 for t = 1:size(data,1)
     %enrich each time-step
     for a = 1:(size(data,2)/2)
