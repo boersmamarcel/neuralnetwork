@@ -53,7 +53,7 @@ net=train(net,X,Y);
 y = net(X);
 %perf = perform(net,y,Y);
 %y = net(Xs,Xi,Ai);
-
+%test
 %to plot:
 y=cell2mat(y);
 Y2=cell2mat(Y)
