@@ -1,4 +1,4 @@
-% gradients = {'graddesc', 'scg', 'quasinew'};
+%gradients = {'graddesc', 'scg', 'quasinew'};
 gradients = {'scg'};
 
 
@@ -11,10 +11,11 @@ for g = 1:length(gradients)
     disp('Start training for gradient');
     disp(gradients{g});
     
-    input = data(:, [4 5 8 9]);
+    input = data(:, [2 3 4 5 8 9]);
     output = data(:, 6:7);
 
 %     hidden_layers = [2500, 3500, 4500];
+   % hidden_layers = [50, 100, 200];
     hidden_layers = [100, 200, 500, 1000, 1500, 2500, 4500, 8500, 12000, 14000, 18000, 22000];
 
 
@@ -34,7 +35,7 @@ for g = 1:length(gradients)
         mean_errors_train = [];
 
 
-        for l = 1:2
+        for l = 1:3
             disp('round');
             disp(l);
             %10-fold cross validation
@@ -110,5 +111,5 @@ xlabel('number of hidden layers')
 ylabel('average error')
 legend(legendText);
 
-saveas(gcf,strcat('rmse_eucl_full_correct_no_xy','.png'));
+saveas(gcf,strcat('rmse_grad','.png'));
     
