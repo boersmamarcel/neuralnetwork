@@ -4,8 +4,6 @@
 
 % May 2012
 
-
-
 %clear all;
 
 
@@ -21,7 +19,7 @@ input_layers = size(input,2);
 output_layers = size(output,2);
 
 
-net = mlp(input_layers, 45000, output_layers, 'linear');
+net = mlp(input_layers, 4500, output_layers, 'linear');
 
 
 options = zeros(1,20);
@@ -30,7 +28,7 @@ options(1) = -1; %suppress warnings
 net = netopt(net, options, input, output, 'scg');%scaled conjugate gradient/standard gradient
 
 
-cycles = 100;
+cycles = 50;
 
 [trainNet, error] = mlptrain(net, input, output, cycles);
 

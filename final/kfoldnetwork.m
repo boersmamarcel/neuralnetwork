@@ -2,6 +2,8 @@
 gradients = {'scg'};
 
 
+%% settings : setup experiment
+
     
 mean_errors_for_gradient_train = {};
 mean_errors_for_gradient_test  = {};
