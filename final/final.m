@@ -8,7 +8,7 @@ for t = 1:size(data,1)
         
        %calculate movement vector
        if t > 1
-           dx = data(t, 2*a -1) - data(t-1, 2*a -1) + normrnd(0,1); %?Correct way to calculate gradient?...
+           dx = data(t, 2*a -1) - data(t-1, 2*a -1) + normrnd(0,1); 
            dy = data(t, 2*a) - data(t-1, 2*a) + normrnd(0,1);
        end
         
