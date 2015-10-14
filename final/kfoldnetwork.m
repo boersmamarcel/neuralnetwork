@@ -62,7 +62,7 @@ for g = 1:length(gradients)
                 net = netopt(net, options, input(trainIdx,:), output(trainIdx,:), gradients{g});%scaled conjugate gradient/standard gradient
 
 
-                cycles = 100;
+                cycles = 10;
 
                 [trainNet, error] = mlptrain(net, input(trainIdx,:), output(trainIdx,:), cycles);
                 
@@ -113,5 +113,5 @@ xlabel('number of hidden layers')
 ylabel('average error')
 legend(legendText);
 
-saveas(gcf,strcat('rmse_grad','.png'));
+saveas(gcf,strcat('rmse_grad_epochs_10_not_enriched','.png'));
     
