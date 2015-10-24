@@ -1,4 +1,4 @@
-data = importdata('enriched.mat');
+data = importdata('../data/enriched.mat');
 
 numberOfFeatures = 9;
 agents = size(data,2)/2;

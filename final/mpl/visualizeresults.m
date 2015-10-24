@@ -10,7 +10,7 @@
 %%train network with optimal parameters
 % 4500 hidden nodes, 100 training cycles default learning rate
 
-dataNN = importdata('featuredata_non_timeseries.mat');
+dataNN = importdata('../data/featuredata_non_timeseries.mat');
 
 input = dataNN(:, [2 3 4 5 8 9]);
 output = dataNN(:, 6:7);
@@ -34,8 +34,8 @@ cycles = 50;
 
 predictedNN = mlpfwd(trainNet, input);
 
-load 'dataset_final_assignment.mat';
-% data = importdata('enriched.mat');
+load '../data/dataset_final_assignment.mat';
+% data = importdata('../data/enriched.mat');
 
 % grid size
 
@@ -217,4 +217,4 @@ end
 plot(agent1x, agent1y, '-r', agent2x, agent2y, '-r', agent3x, agent3y, '-r');hold on;
 plot(agent1xNN, agent1yNN, '-b', agent2xNN, agent2yNN, '-b', agent3xNN, agent3yNN, '-b'); 
 
-saveas(gcf,strcat('paths','.png'));
+saveas(gcf,strcat('../images/paths','.png'));

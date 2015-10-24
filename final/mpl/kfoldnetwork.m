@@ -1,25 +1,22 @@
+%% settings : setup experiment
+data = importdata('../data/featuredata_non_timeseries.mat');
+
 %gradients = {'graddesc', 'scg', 'quasinew'};
 gradients = {'scg'};
 
+% hidden_layers = [2500, 3500, 4500];
+% hidden_layers = [50, 100, 200];
+hidden_layers = [100, 200, 500, 1000, 1500, 2500, 4500, 8500, 12000, 14000, 18000, 22000];
 
-%% settings : setup experiment
-
+input = data(:, [2 3 4 5 8 9]);
+output = data(:, 6:7);
     
 mean_errors_for_gradient_train = {};
 mean_errors_for_gradient_test  = {};
 
 for g = 1:length(gradients)
-    data = importdata('featuredata_non_timeseries.mat');
     disp('Start training for gradient');
     disp(gradients{g});
-    
-    input = data(:, [2 3 4 5 8 9]);
-    output = data(:, 6:7);
-
-%         hidden_layers = [2500, 3500, 4500];
-   % hidden_layers = [50, 100, 200];
-    hidden_layers = [100, 200, 500, 1000, 1500, 2500, 4500, 8500, 12000, 14000, 18000, 22000];
-
 
     errors_test=[];
     errors_train=[];
@@ -113,5 +110,5 @@ xlabel('number of hidden layers')
 ylabel('average error')
 legend(legendText);
 
-saveas(gcf,strcat('rmse_grad_epochs_10_not_enriched','.png'));
+saveas(gcf,strcat('images/rmse_grad_epochs_10_not_enriched','.png'));
     

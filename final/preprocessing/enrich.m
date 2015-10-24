@@ -1,4 +1,4 @@
-data = importdata('dataset_final_assignment.mat');
+data = importdata('../data/dataset_final_assignment.mat');
 dataEnriched = data;
 %% enrich data
 additional = 0;
@@ -32,5 +32,5 @@ for t = 1:size(data,1)
     end
 end
 
-save 'enriched.mat' dataEnriched
+save '../data/enriched.mat' dataEnriched
 

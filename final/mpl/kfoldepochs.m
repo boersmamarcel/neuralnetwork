@@ -1,17 +1,17 @@
+%% settings : setup experiment
 %gradients = {'graddesc', 'scg', 'quasinew'};
 gradients = {'scg'};
 
-
-%% settings : setup experiment
 hidden_nodes = 4500;
 % cycles = [10 20 40 80 160 320];
 cycles = [1 2 3 4 5 10 20];
+
+data = importdata('../data/featuredata_non_timeseries.mat');
     
 mean_errors_for_gradient_train = {};
 mean_errors_for_gradient_test  = {};
 
 for g = 1:length(gradients)
-    data = importdata('featuredata_non_timeseries.mat');
     disp('Start training for gradient');
     disp(gradients{g});
     
@@ -106,5 +106,5 @@ xlabel('number of epochs')
 ylabel('average error')
 legend(legendText);
 
-saveas(gcf,strcat('rmse_epochs2','.png'));
+saveas(gcf,strcat('images/rmse_epochs2','.png'));
     
