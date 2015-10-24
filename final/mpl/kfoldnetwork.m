@@ -6,7 +6,10 @@ gradients = {'scg'};
 
 % hidden_layers = [2500, 3500, 4500];
 % hidden_layers = [50, 100, 200];
-hidden_layers = [100, 200, 500, 1000, 1500, 2500, 4500, 8500, 12000, 14000, 18000, 22000];
+%hidden_layers = [100, 200, 500, 1000, 1500, 2500, 4500, 8500, 12000, 14000, 18000, 22000];
+hidden_layers = [100, 200, 500, 1000, 1500, 2500];
+
+cycles = 10;
 
 input = data(:, [2 3 4 5 8 9]);
 output = data(:, 6:7);
@@ -59,8 +62,6 @@ for g = 1:length(gradients)
                 net = netopt(net, options, input(trainIdx,:), output(trainIdx,:), gradients{g});%scaled conjugate gradient/standard gradient
 
 
-                cycles = 10;
-
                 [trainNet, error] = mlptrain(net, input(trainIdx,:), output(trainIdx,:), cycles);
                 
                 y = mlpfwd(trainNet, input(testIdx,:));
@@ -110,5 +111,5 @@ xlabel('number of hidden layers')
 ylabel('average error')
 legend(legendText);
 
-saveas(gcf,strcat('images/rmse_grad_epochs_10_not_enriched','.png'));
+saveas(gcf,strcat('../images/rmse_grad_epochs_10_non_enriched_redo','.png'));
     
